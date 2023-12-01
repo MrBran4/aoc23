@@ -10,8 +10,7 @@ const THREES = [
 const FOURS = [
     4 => "four",
     5 => "five",
-    9 => "nine",
-    0 => "zero"
+    9 => "nine"
 ];
 
 const FIVES = [
