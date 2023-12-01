@@ -1,0 +1,11 @@
+{
+    "name": "PHP",
+    "image": "mcr.microsoft.com/devcontainers/php:8.2",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "devsense.phptools-vscode"
+            ]
+        }
+    }
+}
