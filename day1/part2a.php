@@ -1,5 +1,5 @@
 <?php
-// Initial solution to part 2
+// Optimisation: Substr before passing to function
 
 // Array of stringy numbers, indexed by the number they represent.
 const SPELLINGS = [
@@ -26,15 +26,11 @@ function number_at_start(string $in): int
     if (strlen($in) < 3)
         return -1;
 
-    // Longest number is 5 chars, so we only need to check the first 5
-    // (substr returns _at most_ 5 chars here)
-    $tocheck = substr($in, 0, 5);
-
     // Check each number in the array
     foreach (SPELLINGS as $idx => $spelling) {
 
         // If the string starts with the spelling, return the index
-        if (0 === strpos($tocheck, $spelling))
+        if (0 === strpos($in, $spelling))
             return $idx;
 
     }
@@ -59,7 +55,8 @@ while (FALSE !== ($line = fgets(STDIN))) {
             $thisNum = (int) $char;
         } else {
             // Otherwise, check if it's a number spelled out
-            $thisNum = number_at_start(substr($line, $idx));
+            // longest word is 5 chars so no point going longer
+            $thisNum = number_at_start(substr($line, $idx, 5));
         }
 
         // If no match, skip updating
@@ -72,8 +69,6 @@ while (FALSE !== ($line = fgets(STDIN))) {
 
         $last = $thisNum;
     }
-
-    echo $first . $last . "\n";
 
     // Skip potential invalid lines
     if (is_null($first) or is_null($last))
