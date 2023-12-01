@@ -1,14 +1,20 @@
 <?php
 
-// Array of stringy numbers, indexed by the number they represent.
-const SPELLINGS = [
+// Arrays of stringy numbers, indexed by the number they represent.
+const THREES = [
     1 => "one",
     2 => "two",
-    6 => "six",
+    6 => "six"
+];
+
+const FOURS = [
     4 => "four",
     5 => "five",
     9 => "nine",
-    0 => "zero",
+    0 => "zero"
+];
+
+const FIVES = [
     3 => "three",
     7 => "seven",
     8 => "eight"
@@ -21,17 +27,41 @@ const SPELLINGS = [
  */
 function number_at_start(string $in): int
 {
+    $maxlen = strlen($in);
+
     // Can't be a number if it's less than 3 chars
-    if (strlen($in) < 3)
+    if (strlen($maxlen) < 3)
         return -1;
 
-    // Check each number in the array
-    foreach (SPELLINGS as $intval => $spelling) {
-
-        // If the string starts with the spelling, return the index
-        if (0 === strpos($in, $spelling))
+    // Check each 3 letter number
+    $check = substr($in, 0, 3);
+    foreach (THREES as $intval => $spelling) {
+        // If the string is the spelling, return the number
+        if ($check === $spelling)
             return $intval;
+    }
 
+    // Skip if it's less than 4 chars
+    if ($maxlen < 4)
+        return -1;
+
+    // Check each 4 letter number
+    $check = substr($in, 0, 4);
+    foreach (FOURS as $intval => $spelling) {
+        // If the string is the spelling, return the number
+        if ($check === $spelling)
+            return $intval;
+    }
+
+    // Skip if it's less than 5 chars
+    if ($maxlen < 5)
+        return -1;
+
+    // Check each 5 letter number
+    foreach (FIVES as $intval => $spelling) {
+        // If the string is the spelling, return the number
+        if ($in === $spelling)
+            return $intval;
     }
 
     // No number found
