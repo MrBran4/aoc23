@@ -56,12 +56,6 @@ pub struct Block {
     pub value: i32,
 }
 
-impl Block {
-    pub fn contains(&self, row: usize, col: usize) -> bool {
-        row == self.row && col >= self.start && col <= self.end
-    }
-}
-
 pub fn find_symbols(grid: &Grid) -> Vec<(usize, usize)> {
     let mut symbols = Vec::new();
 

@@ -1,4 +1,4 @@
-use common::{get_neighbours, Element};
+use common::{get_neighbours, Block, Element};
 
 mod common;
 
@@ -12,21 +12,28 @@ fn main() {
     // Extract all numeric blocks
     let blocks = common::find_blocks(&grid);
 
-    // Sum the blocks
-    let total: i32 = blocks
-        .iter()
-        .filter(|b| {
-            get_neighbours(b, &grid)
-                .iter()
-                .filter(|el| match el {
-                    Element::Symbol() => true,
-                    _ => false,
-                })
-                .count()
-                > 0
-        })
-        .map(|b| b.value)
-        .sum();
+    // Find all symbols
+    let symbols = common::find_symbols(&grid);
 
-    println!("Total: {}", total)
+    let mut sum = 0;
+
+    // Loop through all symbols, if they neighbour exactly two blocks then multiply the blocks.
+    for (row, col) in symbols {
+        let neighbours = get_neighbours(
+            &Block {
+                row,
+                start: col,
+                end: col,
+                value: 0,
+            },
+            &grid,
+        );
+
+        let mut block_count = 0;
+        let mut block_product = 1;
+
+        if block_count == 2 {
+            sum += block_product;
+        }
+    }
 }
